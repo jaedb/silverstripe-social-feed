@@ -24,16 +24,13 @@ class FacebookAuth extends Extension {
 
 	function get() {
 		
-		// load keys and secrets from config
+		// load site config (contains API keys etc)
 		$siteConfig = SiteConfig::current_site_config();
-		$profile_id = $siteConfig->SocialFeedFacebookPageID;
-		$app_id = $siteConfig->SocialFeedFacebookAppID;
-		$app_secret = $siteConfig->SocialFeedFacebookAppSecret;
 
 		//Retrieve auth token
-		$authToken = $this->fetchUrl('https://graph.facebook.com/oauth/access_token?grant_type=client_credentials&client_id='.$app_id.'&client_secret='.$app_secret);
+		$authToken = $this->fetchUrl('https://graph.facebook.com/oauth/access_token?grant_type=client_credentials&client_id='.$siteConfig->SocialFeedFacebookAppID.'&client_secret='.$siteConfig->SocialFeedFacebookAppSecret);
 
-		$json_object = $this->fetchUrl('https://graph.facebook.com/'.$profile_id.'/feed?'.$authToken);
+		$json_object = $this->fetchUrl('https://graph.facebook.com/'.$siteConfig->SocialFeedFacebookPageID.'/feed?'.$authToken);
 				
 		return $json_object;
 	}

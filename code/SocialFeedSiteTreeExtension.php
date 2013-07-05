@@ -1,15 +1,6 @@
 <?php
 
 class SocialFeedSiteTreeExtension extends DataExtension {
-	/*
-	static $db = array(
-		'Testing' => 'Varchar'
-	);
-	
-	function updateCMSFields(&$fields){	
-		$fields->addFieldsToTab('Root.Main', new TextField('Testing','Testing') );
-	}
-	*/
 }
 
 class SocialFeedContentControllerExtension extends Extension {
