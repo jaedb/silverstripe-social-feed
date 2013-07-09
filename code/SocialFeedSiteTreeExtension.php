@@ -105,7 +105,7 @@ class SocialFeedContentControllerExtension extends Extension {
 	/* ======================================================== SOCIAL FEED COMPILER ====== */
 	/* ==================================================================================== */
 	
-	function SocialFeed(){
+	function CompileSocialFeed(){
 		
 		// fetch the feeds
 		$tweets = $this->TwitterFeed();
@@ -138,10 +138,10 @@ class SocialFeedContentControllerExtension extends Extension {
 	
 	/* ----------------- RENDERER --- */
 	
-	function Content(){
+	function SocialFeed(){
 		
 		// get compiled social feed
-		$output = $this->SocialFeed();
+		$output = $this->CompileSocialFeed();
 		
 		// return rendered HTML
 		return $this->owner->Customise( $output )->renderWith('SocialFeedItem');
