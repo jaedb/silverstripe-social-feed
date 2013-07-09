@@ -24,6 +24,14 @@ class SocialFeedSiteConfigExtension extends DataExtension {
 		'SocialFeedLinkedInUserSecret'		=> 'Varchar(100)'
 	);
 	
+	function extraStatics() { 
+		return array(
+			'defaults' => array( 
+					'SocialFeedLimit' => '10' 
+				)
+			); 
+	}
+	
 	public function updateCMSFields(FieldList $fields) {
 	
 		$fields->addFieldsToTab( 'Root.SocialFeed.Main', new TextField('SocialFeedLimit', 'Feed items to display' ) );

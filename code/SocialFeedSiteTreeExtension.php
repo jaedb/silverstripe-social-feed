@@ -6,12 +6,9 @@ class SocialFeedSiteTreeExtension extends DataExtension {
 
 class SocialFeedContentControllerExtension extends Extension {
 	
+	// setup error message container
+	public $error;
 	
-	public function SocialFeedImagesFolder(){
-		
-		return ;
-	
-	}
 	
 	
 	/* ================================================================ TWITTER FEED ====== */
@@ -32,6 +29,13 @@ class SocialFeedContentControllerExtension extends Extension {
 
 		// using connection, get the user timeline
 		$tweets = $connection->get("statuses/user_timeline");
+		
+		
+		// check if tweet getter failed
+		if( isset($tweets->errors) ){
+			$this->error = 'Could not connect to Twitter. Check your API keys.';
+			return false;
+		}
 		
 		// construct array list from twitter feed
 		$items = new ArrayList(); 
@@ -78,8 +82,16 @@ class SocialFeedContentControllerExtension extends Extension {
 		$connection = new FacebookAuth();
 		
 		// get the Facebook feed
-		$feed = $connection->get();		
+		$feed = $connection->get();	
 		$posts = json_decode( $feed, true );
+		
+		// check if feed getter failed
+		if( isset( $posts['error'] ) ){
+			$this->error = 'Could not connect to Facebook. Check your API keys.';
+			return false;
+		}
+		
+		// parse feed into array
 		$posts = $posts['data'];
 		
 		// construct array list from twitter feed
@@ -93,9 +105,9 @@ class SocialFeedContentControllerExtension extends Extension {
 				new ArrayData( 
 					array(
 							'Source'		=> 'facebook',
-							'Text'			=> $post['message'],
-							'Picture'		=> $post['picture'],
-							'Link'			=> $post['link'],
+							'Text'			=> isset($post['message']) ? $post['message'] : null,
+							'Picture'		=> isset($post['picture']) ? $post['picture'] : null,
+							'Link'			=> isset($post['link']) ? $post['link'] : null,
 							'Date'			=> date('d M, Y', strtotime( $post['created_time'] ) ),
 							'SortableDate'	=> date('Y-m-d', strtotime( $post['created_time'] ) ),
 							'UserName'		=> $post['from']['name'],
@@ -126,13 +138,21 @@ class SocialFeedContentControllerExtension extends Extension {
 		// fetch twitter and merge into feed
 		if( $siteConfig->SocialFeedTwitterActive ){
 			$tweets = $this->TwitterFeed();
-			$items->merge( $tweets );
+			
+			// make sure we got tweets
+			if( $tweets ){
+				$items->merge( $tweets );
+			}
 		}
 		
 		// fetch facebook and merge into feed
 		if( $siteConfig->SocialFeedFacebookActive ){
 			$facebook = $this->FacebookFeed();
-			$items->merge( $facebook );	
+			
+			// make sure we got posts
+			if( $facebook ){
+				$items->merge( $facebook );	
+			}
 		}
 		
 		// sort by date
@@ -143,7 +163,8 @@ class SocialFeedContentControllerExtension extends Extension {
 		
 		// store them in a template array (for template loop)
 		$feed = array(
-			'Items' => $items
+			'Items' => $items,
+			'Error' => $this->error
 		);
 		
 		return $feed;
