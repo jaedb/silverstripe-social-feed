@@ -14,5 +14,9 @@ Compile your social media feeds into one, easy-to-style and customisable block.
 - Run a `/dev/build?flush=all`
 - Login to the admin and configure your API keys from Settings > Social Feed
 
+**Customising**
+- Standard template loops mean you can change the appearance quickly and easily
+- Basic styles are built into the module, but these are overwritten by your theme's stylesheets as you deem appropriate
+
 **Support**
 - Please email me (james _at_ jamesbarnsley co.nz)
