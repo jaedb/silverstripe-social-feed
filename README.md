@@ -5,7 +5,7 @@ Compile your social media feeds into one, easy-to-style and customisable block.
 
 **Overview**
 - Loads your Twitter and Facebook feeds
-- Hook can be placed anywhere in your article content with `$SocialFeed` string.
+- Hook can be placed anywhere in your templates with `$SocialFeed` string.
 - Configure the module from within the CMS Settings / Social Feed tab
 
 **Installation**
@@ -17,6 +17,10 @@ Compile your social media feeds into one, easy-to-style and customisable block.
 **Customising**
 - Standard template loops mean you can change the appearance quickly and easily
 - Basic styles are built into the module, but these are overwritten by your theme's stylesheets as you deem appropriate
+
+**To-do**
+- Load feed using ajax to avoid delaying page load
+- Cache individual feed sources for further page load efficiency
 
 **Support**
 - Please email me (james _at_ jamesbarnsley co.nz)
