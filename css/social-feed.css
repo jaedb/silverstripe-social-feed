@@ -4,3 +4,26 @@
 --- July 2013
 */
 
+#social-feed .social-feed-item {
+	padding: 20px;
+	border-top: 1px solid #CCCCCC;
+	clear: both;}
+	
+#social-feed .social-feed-item .user-picture {
+	float: left;
+	padding-right: 15px;
+	padding-bottom: 15px;}
+	
+#social-feed .social-feed-item .text {
+	padding: 0;}
+	
+#social-feed .social-feed-item .date {
+	padding: 5px 0 0 0;
+	color: #777777;
+	font-size: 0.85em;
+	text-transform: uppercase;}
+	
+#social-feed .social-feed-item .source-icon {
+	display: inline-block;
+	vertical-align: baseline;
+	margin: 0 2px -2px 0;}

@@ -1,5 +1,8 @@
 <?php
 
+// set module directory (in case installer didn't install in proper social-feed folder!)
+define('SOCIAL_FEED_DIRECTORY', basename(dirname(__FILE__)));
+
 // include required library
 Object::add_extension('SocialFeedSiteTreeExtension', 'TwitterOAuth');
 

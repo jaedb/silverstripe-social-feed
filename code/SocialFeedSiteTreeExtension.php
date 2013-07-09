@@ -1,9 +1,17 @@
 <?php
 
 class SocialFeedSiteTreeExtension extends DataExtension {
+	
 }
 
 class SocialFeedContentControllerExtension extends Extension {
+	
+	
+	public function SocialFeedImagesFolder(){
+		
+		return ;
+	
+	}
 	
 	
 	/* ================================================================ TWITTER FEED ====== */
@@ -42,6 +50,7 @@ class SocialFeedContentControllerExtension extends Extension {
 							'UserName'		=> $tweet->user->screen_name,
 							'UserLink'		=> 'http://twitter.com/'.$tweet->user->screen_name,
 							'UserPicture'	=> $tweet->user->profile_image_url,
+							'SourceIcon'	=> SOCIAL_FEED_DIRECTORY . '/images/source-twitter.gif'
 						) 
 					)
 				); 
@@ -92,6 +101,7 @@ class SocialFeedContentControllerExtension extends Extension {
 							'UserName'		=> $post['from']['name'],
 							'UserLink'		=> 'http://facebook.com/'.$post['from']['id'],
 							'UserPicture'	=> '',
+							'SourceIcon'	=> SOCIAL_FEED_DIRECTORY . '/images/source-facebook.gif'
 						) 
 					)
 				); 
@@ -107,24 +117,28 @@ class SocialFeedContentControllerExtension extends Extension {
 	
 	function CompileSocialFeed(){
 		
-		// fetch the feeds
-		$tweets = $this->TwitterFeed();
-		$facebook = $this->FacebookFeed();
-		// $linkedin = $this->LinkedInFeed();
+		// grab the module config (in Admin > Settings > Social Feed)
+		$siteConfig = SiteConfig::current_site_config();
 		
 		// create compiled feed
 		$items = new ArrayList();
 		
-		// merge feed sources
-		$items->merge( $tweets );
-		$items->merge( $facebook );
-		//$items->merge( $linkedin );				
+		// fetch twitter and merge into feed
+		if( $siteConfig->SocialFeedTwitterActive ){
+			$tweets = $this->TwitterFeed();
+			$items->merge( $tweets );
+		}
+		
+		// fetch facebook and merge into feed
+		if( $siteConfig->SocialFeedFacebookActive ){
+			$facebook = $this->FacebookFeed();
+			$items->merge( $facebook );	
+		}
 		
 		// sort by date
 		$items->sort( 'SortableDate', 'DESC' );
 		
 		// apply limit (set in the CMS with SocialFeedSiteConfigExtension)
-		$siteConfig = SiteConfig::current_site_config();
 		$items = $items->limit( $siteConfig->SocialFeedLimit );
 		
 		// store them in a template array (for template loop)
@@ -139,6 +153,9 @@ class SocialFeedContentControllerExtension extends Extension {
 	/* ----------------- RENDERER --- */
 	
 	function SocialFeed(){
+	
+		// include default CSS styles
+		Requirements::css(SOCIAL_FEED_DIRECTORY . '/css/social-feed.css');
 		
 		// get compiled social feed
 		$output = $this->CompileSocialFeed();
