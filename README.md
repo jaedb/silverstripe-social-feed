@@ -21,6 +21,7 @@ Compile your social media feeds into one, easy-to-style and customisable block.
 **To-do**
 - Load feed using ajax to avoid delaying page load
 - Cache individual feed sources for further page load efficiency
+- Add consideration for personal Facebook feeds (currently only grabs Pages)
 
 **Support**
 - Please email me (james _at_ jamesbarnsley co.nz)
