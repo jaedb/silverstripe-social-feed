@@ -1,14 +1,28 @@
 <?php
 
-class SocialFeedSiteTreeExtension extends DataExtension {
-	
-}
-
-class SocialFeedContentControllerExtension extends Extension {
-	
+class SocialFeedController extends DataExtension {
+		
 	// setup error message container
-	public $error;
+	public $error;	
 	
+	// allow this custom action
+	public static $allowed_actions = array(
+		'SocialFeed' );		
+	
+	
+	/* ================================================ RENDER FEED (called by Ajax) ====== */
+	/* ==================================================================================== */
+	
+	// construct the social feed
+	function SocialFeed( $request ) {	
+		
+		// run the social feed getter
+		$output = $this->CompileSocialFeed();
+		
+		// return rendered HTML
+		return $this->owner->Customise( $output )->renderWith('SocialFeedItem');		
+	
+    }
 	
 	
 	/* ================================================================ TWITTER FEED ====== */
@@ -171,17 +185,4 @@ class SocialFeedContentControllerExtension extends Extension {
 	}
 	
 	
-	/* ----------------- RENDERER --- */
-	
-	function SocialFeed(){
-	
-		// include default CSS styles
-		Requirements::css(SOCIAL_FEED_DIRECTORY . '/css/social-feed.css');
-		
-		// get compiled social feed
-		$output = $this->CompileSocialFeed();
-		
-		// return rendered HTML
-		return $this->owner->Customise( $output )->renderWith('SocialFeedItem');
-	}
 }

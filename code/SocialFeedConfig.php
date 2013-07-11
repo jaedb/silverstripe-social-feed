@@ -1,6 +1,6 @@
 <?php
 
-class SocialFeedSiteConfigExtension extends DataExtension {
+class SocialFeedConfig extends DataExtension {
 	
 	// configuration options
 	static $db = array(
@@ -24,7 +24,7 @@ class SocialFeedSiteConfigExtension extends DataExtension {
 		'SocialFeedLinkedInUserSecret'		=> 'Varchar(100)'
 	);
 	
-	function extraStatics() { 
+	function extraStatics($class = NULL, $extension = NULL) { 
 		return array(
 			'defaults' => array( 
 					'SocialFeedLimit' => '10' 
