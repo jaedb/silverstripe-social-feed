@@ -7,14 +7,36 @@ class SocialFeedController extends DataExtension {
 	
 	// allow this custom action
 	public static $allowed_actions = array(
-		'SocialFeed' );		
+		'SocialFeedGetter' );		
+		
+		
+		
+		
+	/* ======================================================= CONTAINER IN TEMPLATE ====== */
+	/* ==================================================================================== */
+	
+	// construct the social feed
+	function SocialFeed() {
+		
+		// include default styles
+		Requirements::css("social-feed/css/social-feed.css");
+		
+		// include required javascript
+		Requirements::javascript("social-feed/js/jquery.js");
+		Requirements::javascript("social-feed/js/social-feed.js");
+		
+		// return rendered HTML container
+		return $this->owner->renderWith('SocialFeed');
+    }
+	
+	
 	
 	
 	/* ================================================ RENDER FEED (called by Ajax) ====== */
 	/* ==================================================================================== */
 	
 	// construct the social feed
-	function SocialFeed( $request ) {	
+	function SocialFeedGetter( $request ) {	
 		
 		// run the social feed getter
 		$output = $this->CompileSocialFeed();
@@ -23,6 +45,8 @@ class SocialFeedController extends DataExtension {
 		return $this->owner->Customise( $output )->renderWith('SocialFeedItem');		
 	
     }
+	
+	
 	
 	
 	/* ================================================================ TWITTER FEED ====== */
