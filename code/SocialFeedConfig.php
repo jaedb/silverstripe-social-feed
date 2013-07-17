@@ -4,7 +4,8 @@ class SocialFeedConfig extends DataExtension {
 	
 	// configuration options
 	static $db = array(
-		'SocialFeedLimit' 					=> 'Int',	
+		'SocialFeedTitle' 					=> 'Text',
+		'SocialFeedLimit' 					=> 'Int',		
 		
 		'SocialFeedFacebookActive'			=> 'Boolean',
 		'SocialFeedFacebookPageID'			=> 'Varchar(100)',
@@ -34,6 +35,7 @@ class SocialFeedConfig extends DataExtension {
 	
 	public function updateCMSFields(FieldList $fields) {
 	
+		$fields->addFieldsToTab( 'Root.SocialFeed.Main', new TextField('SocialFeedTitle', 'Feed title' ) );
 		$fields->addFieldsToTab( 'Root.SocialFeed.Main', new TextField('SocialFeedLimit', 'Feed items to display' ) );
 		
 		$fields->addFieldsToTab( 'Root.SocialFeed.Facebook', new LiteralField('html_1', '<h2>Facebook</h2>' ) );
