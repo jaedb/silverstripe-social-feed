@@ -1,0 +1,11 @@
+{
+	"name": "jaedb/silverstripe-social-feed",
+	"description": "Social Feed framework for SilverStripe",
+	"require": {
+		"facebook/php-sdk-v4" : "4.0.*"
+	},
+	"config": {
+		"process-timeout": 600
+	},
+	"minimum-stability": "dev"
+}

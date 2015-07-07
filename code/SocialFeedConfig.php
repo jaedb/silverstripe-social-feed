@@ -25,14 +25,6 @@ class SocialFeedConfig extends DataExtension {
 		'SocialFeedLinkedInUserSecret'		=> 'Varchar(100)'
 	);
 	
-	function extraStatics($class = NULL, $extension = NULL) { 
-		return array(
-			'defaults' => array( 
-					'SocialFeedLimit' => '10' 
-				)
-			); 
-	}
-	
 	public function updateCMSFields(FieldList $fields) {
 	
 		$fields->addFieldsToTab( 'Root.SocialFeed.Main', new TextField('SocialFeedTitle', 'Feed title' ) );
@@ -50,15 +42,6 @@ class SocialFeedConfig extends DataExtension {
 		$fields->addFieldsToTab( 'Root.SocialFeed.Twitter', new TextField('SocialFeedTwitterConsumerSecret', 'Consumer Secret' ) );
 		$fields->addFieldsToTab( 'Root.SocialFeed.Twitter', new TextField('SocialFeedTwitterAccessToken', 'Access Token' ) );
 		$fields->addFieldsToTab( 'Root.SocialFeed.Twitter', new TextField('SocialFeedTwitterAccessSecret', 'Access Secret' ) );
-		
-		/*
-		$fields->addFieldsToTab( 'Root.SocialFeed.LinkedIn', new LiteralField('html_2', '<h2>LinkedIn</h2>' ) );
-		$fields->addFieldsToTab( 'Root.SocialFeed.LinkedIn', new CheckboxField('SocialFeedLinkedInActive', 'Show LinkedIn Feed?' ) );
-		$fields->addFieldsToTab( 'Root.SocialFeed.LinkedIn', new TextField('SocialFeedLinkedInAPIKey', 'API Key' ) );
-		$fields->addFieldsToTab( 'Root.SocialFeed.LinkedIn', new TextField('SocialFeedLinkedInSecretKey', 'Secret Key' ) );
-		$fields->addFieldsToTab( 'Root.SocialFeed.LinkedIn', new TextField('SocialFeedLinkedInUserToken', 'User Token' ) );
-		$fields->addFieldsToTab( 'Root.SocialFeed.LinkedIn', new TextField('SocialFeedLinkedInUserSecret', 'User Secret' ) );
-		*/
 	}
 
 }
