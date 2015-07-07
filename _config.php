@@ -1,16 +1,10 @@
 <?php
 
-// set module directory (in case installer didn't install in proper social-feed folder!)
-define('SOCIAL_FEED_DIRECTORY', basename(dirname(__FILE__)));
+// import our FacebookSession class
+use Facebook\FacebookSession;
 
-// enable social feed SiteTree extension
-Object::add_extension('SiteTree', 'SocialFeedSiteTree');
-
-// enable social feed SiteConfig extension
+// enable social feed SiteConfig extension - this handles our config
 Object::add_extension('SiteConfig', 'SocialFeedConfig');
 
-// enable social feed controller
+// enable social feed controller - this allows us to parse data to the site content
 Object::add_extension('ContentController', 'SocialFeedController');
-
-// include required OAuth library
-Object::add_extension('SocialFeedController', 'TwitterOAuth');

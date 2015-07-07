@@ -8,9 +8,10 @@ class SocialFeedConfig extends DataExtension {
 		'SocialFeedLimit' 					=> 'Int',		
 		
 		'SocialFeedFacebookActive'			=> 'Boolean',
-		'SocialFeedFacebookPageID'			=> 'Varchar(100)',
+		'SocialFeedFacebookPageID'			=> 'Varchar(1000)',
 		'SocialFeedFacebookAppID'			=> 'Varchar(100)',
 		'SocialFeedFacebookAppSecret'		=> 'Varchar(100)',	
+		'SocialFeedFacebookToken'			=> 'Varchar(1000)',	
 		
 		'SocialFeedTwitterActive'			=> 'Boolean',
 		'SocialFeedTwitterConsumerKey'		=> 'Varchar(100)',
@@ -32,9 +33,10 @@ class SocialFeedConfig extends DataExtension {
 		
 		$fields->addFieldsToTab( 'Root.SocialFeed.Facebook', new LiteralField('html_1', '<h2>Facebook</h2>' ) );
 		$fields->addFieldsToTab( 'Root.SocialFeed.Facebook', new CheckboxField('SocialFeedFacebookActive', 'Show Facebook Feed?' ) );
-		$fields->addFieldsToTab( 'Root.SocialFeed.Facebook', new TextField('SocialFeedFacebookPageID', 'Facebook Page ID' ) );
+		$fields->addFieldsToTab( 'Root.SocialFeed.Facebook', new TextField('SocialFeedFacebookPageID', 'Facebook Page ID (comma-separated list)' ) );
 		$fields->addFieldsToTab( 'Root.SocialFeed.Facebook', new TextField('SocialFeedFacebookAppID', 'App ID' ) );
 		$fields->addFieldsToTab( 'Root.SocialFeed.Facebook', new TextField('SocialFeedFacebookAppSecret', 'App Secret' ) );
+		$fields->addFieldsToTab( 'Root.SocialFeed.Facebook', new TextField('SocialFeedFacebookToken', 'Long-living access token' ) );
 		
 		$fields->addFieldsToTab( 'Root.SocialFeed.Twitter', new LiteralField('html_2', '<h2>Twitter</h2>' ) );
 		$fields->addFieldsToTab( 'Root.SocialFeed.Twitter', new CheckboxField('SocialFeedTwitterActive', 'Show Twitter Feed?' ) );
